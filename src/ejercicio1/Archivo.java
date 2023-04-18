@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.HashSet;
 
 public class Archivo {
 
@@ -52,7 +53,7 @@ public class Archivo {
 		}
 	}
 	
-	public void lee_lineas() {
+	/*public void lee_lineas() {
 		FileReader entrada;
 		try {
 			entrada = new FileReader(ruta);
@@ -69,8 +70,38 @@ public class Archivo {
 		} catch (IOException e) {
 			System.out.println("No se encontro el archivo");
 		}
+	}*/
+	
+	public HashSet <String> lee_lineas() {
+		FileReader entrada;
+		
+		HashSet <String> lista = new HashSet <String> ();
+		try {
+			entrada = new FileReader(ruta);
+			BufferedReader miBuffer = new BufferedReader(entrada);
+			
+		   String linea = "";
+			while (linea != null) {
+				System.out.println("linea:" + linea);
+				
+				lista.add(linea);
+				
+				linea = miBuffer.readLine();
+			}
+			miBuffer.close();
+			entrada.close();
+		
+
+		} catch (IOException e) {
+			System.out.println("No se encontro el archivo");
+		}
+		
+		return lista;
 	}
 
+	
+	
+	//getters y setters
 	public String getRuta() {
 		return ruta;
 	}
