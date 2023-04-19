@@ -82,7 +82,6 @@ public class Archivo {
 			
 		   String linea = "";
 			while (linea != null) {
-				System.out.println("linea:" + linea);
 				
 				lista.add(linea);
 				

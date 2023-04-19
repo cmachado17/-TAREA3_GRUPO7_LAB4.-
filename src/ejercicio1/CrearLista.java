@@ -1,7 +1,9 @@
 package ejercicio1;
 
-import java.util.HashSet;
-import java.util.TreeSet;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+
 
 public class CrearLista {
 	
@@ -14,22 +16,28 @@ public class CrearLista {
 	
 	//Metodos
 	
-	public  void crearLista() {
+	public  ArrayList <Persona>  crearLista() {
 		
-	TreeSet <Persona> listaPersonas = new TreeSet <Persona> ();
-	Persona persona = new Persona();
+	ArrayList <Persona> listaPersonas = new ArrayList <Persona> ();
+	Iterator <String>it = archivo.lee_lineas().iterator();
 	
 	if	(archivo.existe()) {
+		while(it.hasNext()) {//pregunto si hay siguiente para recorrer
+		String [] e = it.next().split("-");//guardo el elemento actual que esta recorriendo.
+		if(e[0] != "" && e[1] != "" && e[2] != "") {
 		
-		for (String elemento : archivo.lee_lineas()) {
-			String[] partes = elemento.split("-");
-			persona.setNombre(partes[0]);
-			persona.setApellido(partes[1]);
-			persona.setDni(partes[2]);
+			Persona persona = new Persona(e[0], e[1], e[2]);
 			listaPersonas.add(persona);
-			}
+		}
+
+		}
 	}
 	
+	//ordenamos la lista
+	Collections.sort(listaPersonas);
+	
+	//devolver la lista ordenada
+	return listaPersonas;
 	
 }
 
@@ -41,4 +49,11 @@ public class CrearLista {
 	public void setArchivo(Archivo archivo) {
 		this.archivo = archivo;
 	}
+	
+	//mostrar lista ordenada
+		public void mostrarLista (ArrayList<Persona> lista) {
+			for (Persona persona : lista) {
+				System.out.println(persona);
+			}
+		}
 }

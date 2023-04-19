@@ -1,6 +1,6 @@
 package ejercicio1;
 
-public class Persona {
+public class Persona implements Comparable <Persona>{
 	private String Nombre;
 	private String Apellido;
 	private String Dni;
@@ -37,4 +37,16 @@ public class Persona {
 	public void setDni(String dni) {
 		Dni = dni;
 	}
+	
+	//metodo para ordenar coparando las personas
+			@Override
+			public int compareTo(Persona otra) {
+				//compara un string con otro y por default es ascdendente
+				return this.Apellido.compareTo(otra.Apellido);
+			}
+
+			@Override
+			public String toString() {
+				return "Persona [Apellido=" + Apellido + ", Nombre= " + Nombre + ", Dni=" + Dni + "]";
+			}
 }

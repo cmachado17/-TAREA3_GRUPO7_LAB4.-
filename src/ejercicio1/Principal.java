@@ -1,5 +1,7 @@
 package ejercicio1;
 
+import java.io.IOException;
+
 import javax.swing.JOptionPane;
 
 public class Principal {
@@ -24,7 +26,8 @@ public class Principal {
 			
 			CrearLista crearLista = new CrearLista();
 			crearLista.setArchivo(archivo);
-			crearLista.crearLista();
+			crearLista.mostrarLista(crearLista.crearLista());
+			
 		}catch (Exception e)
 		{
 			System.out.println("no se pudo crear la lista");
