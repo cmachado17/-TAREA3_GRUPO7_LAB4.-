@@ -38,7 +38,7 @@ public class Persona implements Comparable <Persona>{
 		Dni = dni;
 	}
 	
-	//metodo para ordenar coparando las personas
+	//metodo para ordenar comparando las personas
 			@Override
 			public int compareTo(Persona otra) {
 				//compara un string con otro y por default es ascdendente
@@ -49,4 +49,31 @@ public class Persona implements Comparable <Persona>{
 			public String toString() {
 				return "Persona [Apellido=" + Apellido + ", Nombre= " + Nombre + ", Dni=" + Dni + "]";
 			}
+			
+			
+
+	public static Boolean verificarDniInvalido(String dni) throws DniInvalido {
+		Boolean auxLetras = false; 
+		
+		for(int i = 0; i < dni.length(); i++) {
+			if(!Character.isDigit(dni.charAt(i)))
+				auxLetras=true;
+		}
+		
+		if(auxLetras == true) {
+			throw new DniInvalido();
+		}
+		
+		return auxLetras;
+	}
+	public static Boolean verificarDniInvalido1(String dni) {
+		Boolean auxLetras = true; 
+		
+		for(int i = 0; i < dni.length(); i++) {
+			if(!Character.isDigit(dni.charAt(i)))
+				auxLetras=false;
+		}
+		return auxLetras;
+	}
 }
+

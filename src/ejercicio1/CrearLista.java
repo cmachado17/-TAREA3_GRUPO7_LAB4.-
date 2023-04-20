@@ -25,14 +25,18 @@ public class CrearLista {
 		while(it.hasNext()) {//pregunto si hay siguiente para recorrer
 		String [] e = it.next().split("-");//guardo el elemento actual que esta recorriendo.
 		if(e[0] != "" && e[1] != "" && e[2] != "") {
-		
+	
+		    if(Persona.verificarDniInvalido1(e[2])) {
 			Persona persona = new Persona(e[0], e[1], e[2]);
+			 System.out.println("Se anadio uno...");
 			listaPersonas.add(persona);
 		}
-
-		}
-	}
+	     
+	     }
+		 }
+	   
 	
+	}
 	//ordenamos la lista
 	Collections.sort(listaPersonas);
 	

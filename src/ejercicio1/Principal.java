@@ -11,7 +11,7 @@ public class Principal {
 		try
 		{
 		String dni = JOptionPane.showInputDialog("Ingrese su dni: ");
-	    Dni.verificarDniInvalido(dni);
+	    Persona.verificarDniInvalido(dni);
 		}
 		catch(DniInvalido e)
 		{
