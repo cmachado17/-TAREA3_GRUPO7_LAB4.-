@@ -66,14 +66,6 @@ public class Persona implements Comparable <Persona>{
 		
 		return auxLetras;
 	}
-	public static Boolean verificarDniInvalido1(String dni) {
-		Boolean auxLetras = true; 
-		
-		for(int i = 0; i < dni.length(); i++) {
-			if(!Character.isDigit(dni.charAt(i)))
-				auxLetras=false;
-		}
-		return auxLetras;
-	}
+
 }
 
