@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
 
 public class Archivo {
@@ -98,7 +99,27 @@ public class Archivo {
 		return lista;
 	}
 
-	
+	public boolean crearArchivoDesdeLista(String nombreArchivo, ArrayList<Persona> Lista)
+	{
+		FileWriter escritura;
+		ruta=nombreArchivo;
+		try {
+			escritura = new FileWriter(nombreArchivo, true);
+			for (Persona persona : Lista) {
+				escritura.write(persona.getApellido()+"-");
+				escritura.write(persona.getNombre()+"-");
+				escritura.write(persona.getDni());
+				escritura.write(13);				
+			}
+			escritura.close();
+			return true;
+		} catch (IOException e) {
+			System.out.println("No se pudo generar el listado.");
+			e.printStackTrace();
+		}
+		return false;
+		
+	}
 	
 	//getters y setters
 	public String getRuta() {
