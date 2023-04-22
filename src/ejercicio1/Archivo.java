@@ -54,26 +54,9 @@ public class Archivo {
 		}
 	}
 	
-	/*public void lee_lineas() {
-		FileReader entrada;
-		try {
-			entrada = new FileReader(ruta);
-			BufferedReader miBuffer = new BufferedReader(entrada);
-			
-		   String linea = "";
-			while (linea != null) {
-				System.out.println(linea);
-				linea = miBuffer.readLine();
-			}
-			miBuffer.close();
-			entrada.close();
-
-		} catch (IOException e) {
-			System.out.println("No se encontro el archivo");
-		}
-	}*/
 	
-	public HashSet <String> lee_lineas() {
+	
+	public HashSet <String> lee_lineas() throws ListaInvalidaException, RutaInvalidaException{
 		FileReader entrada;
 		
 		HashSet <String> lista = new HashSet <String> ();
@@ -95,11 +78,15 @@ public class Archivo {
 		} catch (IOException e) {
 			System.out.println("No se encontro el archivo");
 		}
+			catch (RutaInvalidaException e) {
+			System.out.println(e + "\n");
+		}
+		
 		
 		return lista;
 	}
 
-	public boolean crearArchivoDesdeLista(String nombreArchivo, ArrayList<Persona> Lista)
+	public boolean crearArchivoDesdeLista(String nombreArchivo, ArrayList<Persona> Lista)throws IOException
 	{
 		FileWriter escritura;
 		ruta=nombreArchivo;

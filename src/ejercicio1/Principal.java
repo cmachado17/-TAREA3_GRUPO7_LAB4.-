@@ -1,5 +1,6 @@
 package ejercicio1;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.ListIterator;
 
@@ -7,44 +8,50 @@ import javax.swing.JOptionPane;
 
 public class Principal {
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+	public static void main(String[] args) throws DniInvalidoException, ListaInvalidaException {
+		
 		ArrayList<Persona> listaPers = new ArrayList<>();
-		Archivo ar = new Archivo();
-		ListIterator <Persona> it = listaPers.listIterator();
+		Archivo archivo = new Archivo();
+		
 		
 		try
 		{
 			String dni = JOptionPane.showInputDialog("Ingrese su dni: ");
 			Persona.verificarDniInvalido(dni);
 		}
-		catch(DniInvalido e)
+		catch(DniInvalidoException e)
 		{
-			System.out.println("El DNI ingresado es invalido");
-			e.printStackTrace();
+			System.out.println("El DNI ingresado es invalido \n");
+			//e.printStackTrace();
 		}
 
 
 		try {
-			Archivo archivo = new Archivo();
+			
 			archivo.setRuta("Personas.txt");
 
-			CrearLista crearLista = new CrearLista();
+			Lista crearLista = new Lista();
 			crearLista.setArchivo(archivo);
 			crearLista.mostrarLista(listaPers=crearLista.crearLista());
 		}
-		catch (Exception e)
+		catch (ListaInvalidaException e)
 		{
-			System.out.println("no se pudo crear la lista");
-			e.printStackTrace();
+			System.out.println(e);
+			//e.printStackTrace();
 		}
 
 
-		while (it.hasNext()) {
-			Persona p = it.next();
-			System.out.println(p.toString());
+		try {
+			
+				if(archivo.existe()) {
+					archivo.crearArchivoDesdeLista("Resultado.txt", listaPers);
+					System.out.println("\n El archivo se creo correctamente \n");
+			}
+			
+		}catch(IOException e) {
+			
+			System.out.println("\n El archivo no pudo ser creado \n");
 		}
-
-		ar.crearArchivoDesdeLista("Resultado.txt", listaPers);
+		
 	}
 }

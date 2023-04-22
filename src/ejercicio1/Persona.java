@@ -1,6 +1,7 @@
 package ejercicio1;
 
 public class Persona implements Comparable <Persona>{
+	
 	private String Nombre;
 	private String Apellido;
 	private String Dni;
@@ -11,7 +12,6 @@ public class Persona implements Comparable <Persona>{
 	}
 	
 	public Persona(String nombre, String apellido, String dni) {
-		super();
 		Nombre = nombre;
 		Apellido = apellido;
 		Dni = dni;
@@ -52,19 +52,21 @@ public class Persona implements Comparable <Persona>{
 			
 			
 
-	public static Boolean verificarDniInvalido(String dni) throws DniInvalido {
+	public static Boolean verificarDniInvalido(String dni) throws DniInvalidoException {
 		Boolean auxLetras = false; 
 		
-		for(int i = 0; i < dni.length(); i++) {
-			if(!Character.isDigit(dni.charAt(i)))
-				auxLetras=true;
-		}
 		
-		if(auxLetras == true) {
-			throw new DniInvalido();
-		}
+			for(int i = 0; i < dni.length(); i++) {
+				if(!Character.isDigit(dni.charAt(i)))
+					auxLetras=true;
+			}
 		
-		return auxLetras;
+			if(auxLetras == true) {
+				throw new DniInvalidoException();
+			}
+		
+			return auxLetras;		
+			
 	}
 
 }

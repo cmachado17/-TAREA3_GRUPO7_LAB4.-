@@ -1,58 +1,66 @@
 package ejercicio1;
 
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 
 
-public class CrearLista {
+public class Lista {
 
 	private Archivo archivo;
 
 	//constructor
-	public CrearLista() {
+	public Lista() {
 
 	}
 
 	//Metodos
 
-	public  ArrayList <Persona>  crearLista() {
+	public  ArrayList <Persona>  crearLista() throws ListaInvalidaException, DniInvalidoException {
 
+	 
 		ArrayList <Persona> listaPersonas = new ArrayList <Persona> ();
+		
+		try {
+			
 		Iterator <String>it = archivo.lee_lineas().iterator();
 		boolean tieneFallas = false;
 
-		if	(archivo.existe()) {
+		if(archivo.existe()) {
 			while(it.hasNext()) {//pregunto si hay siguiente para recorrer
 				String [] e = it.next().split("-");//guardo el elemento actual que esta recorriendo.
 				if(e[0] != "" && e[1] != "" && e[2] != "") {
 					try {
 						if(!Persona.verificarDniInvalido(e[2])) {
 							Persona persona = new Persona(e[0], e[1], e[2]);
-							//System.out.println("Se anadio uno...");
 							listaPersonas.add(persona);
 						}
 					}
-					catch (DniInvalido ex){
+					catch (DniInvalidoException ex){
 						tieneFallas=true;
-						//System.out.println("no se pudo crear la lista");
+						System.out.println(ex + ": " + e[2] + " de " + e[1] + "," + e[0] + "\n");
+						
 					}
 				}
 			}
 			if(tieneFallas) {
-				System.out.println("No se pudieron agregar todos los registros a la lista porque algunos tenían errores");							
+				System.out.println("No se pudieron agregar todos los registros a la lista porque algunos tenían errores \n");							
 			}
 			else {
-				System.out.println("Listado generado correctamente!");
+				System.out.println("Listado generado correctamente!\n");
 			}
 		}
 
 		//ordenamos la lista
 		Collections.sort(listaPersonas);
-
+		
+		}catch(ListaInvalidaException e) {
+			System.out.println(e + "\n");
+		}
+	
 		//devolver la lista ordenada
 		return listaPersonas;
-
 	}
 
 	//getters y setters
